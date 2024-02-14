@@ -85,9 +85,15 @@ The target column is 'injuries_total'. We converted to '1' if you had one or mor
 We ran a train-test-split to split the data into training,validation and test sets. We then split the categorical and numerical columns to enable encoding
 
 ## Model
-We tested the following models k-nearest neighbors and decision trees. They both returned an accuracy rate of 83%
+We tested the following models:
+1. Logistic Regression
+2. K-Nearest Neighbors
+3. Decision Trees
 
-## Conclusion and Observation
+- The average accuracy rate was 83%
+- Decision Trees Model is recommended for this prediction as the dataset is large and the model can handle both categorical and numerical data better
+
+## Findings
 - Most of the injuries recorded were caused by drivers between the ages of 25 to 50 years falling into the adult category
 - Based on the data, shows that most accidents occur in the afternoon/rush hour.
 - It also shows that most accidents occur in speed limit zones labeled between 30-40 mph.
@@ -97,7 +103,9 @@ We tested the following models k-nearest neighbors and decision trees. They both
 ## Recommendations
 
 1. The City to put restrictions on vehicles allowed on roads to be below ten years
-2. The city lowers the speed limit during afternoon/rush hour or more patrol in the 30-40 mph zones.
-3. The city should increase the traffic control devices to reduce accidents occurrences
+2. The City lowers the speed limit during afternoon/rush hour or more patrol in the 30-40 mph zones.
+3. The City should increase the traffic control devices to reduce accidents occurrences
+
+
 
 

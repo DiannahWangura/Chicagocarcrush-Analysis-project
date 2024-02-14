@@ -1,45 +1,103 @@
-## 1. Problem Statement 
-Vehicle Safety Board of Chicago working with the insurance stakeholder are launching a campaign to reduce car crashes in the city. They would like to determine which car crashes are preventable and which are not. Specifically: Preventable Crashes: These accidents could have easily been avoided. They typically result from not following traffic laws or negligent driving. 
+![Headerimage](./Charts%20%26%20Images/traffic.gif)
 
-## 2. Data Preprocessing:
-a. Dropping Irrelevant Columns: 
-Columns that are not relevant to the prediction task such as "", "", "", "", "", "", "", "", "", "", "" were removed to reduce the dimensionality of the datasets and focus the model on relevant features whilst improving computational efficiency.
+# Chicago Car Crash Data
+## Predicting Causes of Chicago Car Accidents & Injuries
 
-b. Checking Missing Data: 
-Rows containing missing values were dropped using "dropna()" method 
+**Author:** DSPT05 - Group 17
 
-c. Checking and handling duplicate data
 
-d. Merging datasets (Crashes, Vehicles & People):
-We used three different datasets and merged them to create a comprehensive dataset for training and training the dataset
+## Overview
 
-e. Label encoding of categorical value:
-Categorical variables were converted into numerical representations using Label Encoding, numerical are suitable for training models
+In the year 2023, the City of Chicago recorded over one hundred thousand traffic accidents. Over two thousand drivers, passengers, and pedestrians are involved and experience fatal or no injuries
 
-f. Train-Test Split:
-The dataset was split into training and testing using the "train_test_split" function. This allows the model to train on one subset and evaluate on another, providing a reliable estimate of the model's performance on unseen data. 
+The goal is to build a classifier to predict the cause of total injuries in a car accident, given information about the vehicle age, weather condition, age of the drivers, and traffic control device status
 
-## 3. Modelling and Analysis:
+If successful and the City of Chicago implements our recommendations, Chicago will see a decrease in injuries and accidents, a decrease in traffic, and an overall increase in safety for all citizens
 
-List the machine learning, time series, or deep learning models you evaluated.
-Briefly explain the rationale for choosing these models.
-Describe your model training and evaluation process, including metrics used.
-Mention any hyperparameter tuning performed and the techniques used.
 
-## 4. Results and Discussion:
+## Data 
 
-Present the key findings of your analysis, including model performance metrics.
-Discuss the strengths and limitations of each model.
-Highlight any interesting patterns or insights discovered from the data.
+The source for the datasets came from the Chicago Data Portal. 
 
-## 5. Conclusions and Future Work:
+***
+Datasets Used:
 
-Summarize the main conclusions drawn from your analysis.
-Discuss the implications of your findings for stakeholders like city officials, insurance companies, etc.
-Suggest potential avenues for future research or improvements to your work.
+1. Traffic Crashes - Crashes
+This dataset contains information about traffic crashes on city streets within the jurisdiction of the Chicago Police Department (CPD). Records are added when crash reports are finalized or amended in the electronic crash reporting system (E-Crash). Data includes parameters such as injuries, street and weather conditions, posted speed limits. 
 
-## 6. Additional Sections (Optional):
-Data Exploration: Briefly describe any exploratory data analysis performed.
-Visualization: Include visualizations if they enhance understanding.
-Code and Resources: Provide links to code repositories or data sources.
-References: List relevant citations used in your research.
+   
+2. Traffic Crashes - People
+This dataset provides details about individuals involved in traffic crashes, including occupants of vehicles, pedestrians, cyclists and others. Injury reports are recorded for each person and the dataset can be linked to the Crash dataset using the "CRASH_RECORD_ID" field, maintaining appropriate relationships.
+
+3. Traffic Crashes - Vehicles
+This dataset contains information about vehicles (or units as they are identified in crash reports) involved in a traffic crash. 
+
+***
+   
+   
+## Methods
+
+1. Obtain:
+Extracting the data from the following files;
+Crash = https://data.cityofchicago.org/Transportation/Traffic-Crashes-Crashes/85ca-t3if/data_preview
+Vehicle = https://data.cityofchicago.org/Transportation/Traffic-Crashes-Vehicles/68nd-jvt3/data_preview
+People = https://data.cityofchicago.org/Transportation/Traffic-Crashes-People/u6pd-qa9d/data_preview
+
+2. Scrub:
+Explore the raw data set and understand the values
+Understanding the null values and deciding whether to drop,fill or replace them
+Replacing values with meaningful data and converting data types
+Deleting irrelevant and redundant columns
+
+3. Explore:
+Creating visualizations to better understand the data
+Engineering New Columns
+Deriving statistics from the data
+
+4. Model:
+Created multiple models including KNN and decision trees
+
+5. Interpret:
+Evaluating the accuracy score which led to both models having a high accuracy
+
+
+## Results
+
+### Original Data
+
+The first steps to creating our model was to load the dataset the various data set separately and do cleaning on each by dropping the columns with the highest number of null values.We then merged the cleaned dataset and renamed it to merged dataset which we further did cleaning by eliminating duplicates and irrelevant columns that would not be used in modelling.
+
+This dataset had 529191 rows and 39 columns and this was still a huge dataset to work with we therefore filtered the dataset to only include the year 2023 and we were left with 68767 rows and 39columns 
+
+Furthermore, we created bins or remapped the values to a more simple form for the following columns; 
+   * crash_hour
+   * age
+   * posted_speed_limit
+   * traffic_control_device
+   * weather_condition
+   * crash_date
+   * vehicle_year
+
+### Identifying Target
+The target column is 'injuries_total'. We converted to '1' if you had one or more injuries and '0' if you had none. The column has been renamed to 'Injuries'.
+
+### Train-Test split
+We ran a train-test-split to split the data into training,validation and test sets. We then split the categorical and numerical columns to enable encoding
+
+## Model
+We tested the following models k-nearest neighbors and decision trees. They both returned an accuracy rate of 83%
+
+## Conclusion and Observation
+- Most of the injuries recorded were caused by drivers between the ages of 25 to 50 years falling into the adult category
+- Based on the data, shows that most accidents occur in the afternoon/rush hour.
+- It also shows that most accidents occur in speed limit zones labeled between 30-40 mph.
+- Most of the vehicles involved in the accidents fell into the old category that is they were on the road for more than ten years
+- Most of the accidents occurred where there were no traffic signals but fewer injuries were observed
+
+## Recommendations
+
+1. The City to put restrictions on vehicles allowed on roads to be below ten years
+2. The city lowers the speed limit during afternoon/rush hour or more patrol in the 30-40 mph zones.
+3. The city should increase the traffic control devices to reduce accidents occurrences
+
+
